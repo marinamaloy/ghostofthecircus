@@ -979,8 +979,9 @@ section {
 
 .video-placeholder {
     max-width: 800px;
+    height: 498px;
     margin: 0 auto;
-    padding: 20px 40px;
+    padding: 60px 40px;
     background: var(--color-bg-card);
     border-radius: 16px;
     border: 2px dashed rgba(201,162,39,0.3);
