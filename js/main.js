@@ -153,7 +153,7 @@
             }
             
             // ВАЖНО: Устанавливаем действие формы (на случай, если оно изменилось)
-            const formAction = contactForm.getAttribute('action') || 'https://formspree.io/f/xwvnpjpq';
+            const formAction = contactForm.getAttribute('action') || 'https://formspree.io/f/mwvnpggn';
             
             try {
                 // Показываем состояние загрузки
