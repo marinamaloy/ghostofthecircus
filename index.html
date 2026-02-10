@@ -569,7 +569,7 @@ function loadQRCodeLibrary() {
         }
         
         const script = document.createElement('script');
-        script.src = 'https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+        script.src = 'https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js';
         script.onload = () => resolve();
         script.onerror = () => reject(new Error('Не удалось загрузить библиотеку QRCode'));
         document.head.appendChild(script);
