@@ -533,44 +533,6 @@ var _hmt = _hmt || [];
                     <h4>联系方式</h4>
                     <p>微信: Alex-lives</p>
                     <p>邮箱: 1379197706@qq.com</p>
-                    <!-- Блок "Поделиться проектом" -->
-<div class="share-section" style="text-align: center; padding: 50px 20px; background: #0f172a; color: white; margin-top: 60px;">
-    <div class="container">
-        <h3 style="margin-bottom: 10px; color: #fbbf24;">分享合作机遇</h3>
-        <p style="margin-bottom: 30px; color: #cbd5e1;">将这份独特的合作提案分享给您的伙伴或同事</p>
-        
-        <div class="share-content" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center; max-width: 800px; margin: 0 auto;">
-            
-            <!-- QR-код -->
-            <div class="qr-code-container" style="text-align: center;">
-                <div id="qrcode" style="width: 180px; height: 180px; margin: 0 auto 15px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);"></div>
-                <p style="font-size: 14px; color: #94a3b8;">微信扫码分享<br>或保存至手机相册</p>
-            </div>
-            
-            <!-- Ссылка и кнопки -->
-            <div class="share-actions" style="text-align: left;">
-                <div class="share-link-box" style="background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                    <p style="margin: 0 0 10px 0; font-weight: bold; color: #f1f5f9;">项目链接:</p>
-                    <div style="display: flex; gap: 10px;">
-                        <input type="text" id="shareableLink" readonly value="https://www.jinmenculture.com" style="flex-grow: 1; padding: 12px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; color: #e2e8f0;">
-                        <button onclick="copyLink()" class="btn-copy" style="padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.3s;">复制链接</button>
-                    </div>
-                    <p id="copyFeedback" style="margin: 10px 0 0 0; font-size: 14px; height: 20px; color: #10b981;"></p>
-                </div>
-                
-                <p style="color: #94a3b8; margin-bottom: 15px;">或直接分享至:</p>
-                <div class="social-share" style="display: flex; gap: 15px;">
-                    <button onclick="shareToWeChat()" style="flex: 1; padding: 12px; background: #1daa63; color: white; border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        <span style="font-size: 18px;">📱</span> 微信
-                    </button>
-                    <button onclick="shareToWeibo()" style="flex: 1; padding: 12px; background: #e6162d; color: white; border: none; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        <span style="font-size: 18px;">🌐</span> 微博
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
                 </div>
             </div>
             
@@ -582,57 +544,39 @@ var _hmt = _hmt || [];
     </footer>
   <!-- JavaScript -->
     <script src="js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<!-- Плавающая кнопка "Поделиться" -->
+<button id="floatingShareBtn" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #C9A227, #8B6914); color: white; border: none; box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4); font-size: 24px; cursor: pointer; z-index: 999; display: flex; align-items: center; justify-content: center;">↗️</button>
+
+<!-- Модальное окно с QR-кодом -->
+<div id="shareModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
+    <div style="background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 320px;">
+        <h3 style="margin-bottom: 20px; color: #1e293b;">分享项目</h3>
+        <div id="floatingQrcode" style="width: 200px; height: 200px; margin: 0 auto 20px; background: white; padding: 15px;"></div>
+        <p style="margin-bottom: 20px; color: #64748b;">扫描二维码，立即分享</p>
+        <button onclick="document.getElementById('shareModal').style.display='none'" style="padding: 10px 30px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer;">关闭</button>
+    </div>
+</div>
+
 <script>
-// Генерация QR-кода
-document.addEventListener('DOMContentLoaded', function() {
-    const currentUrl = window.location.href;
-    document.getElementById('shareableLink').value = currentUrl;
+// Плавающая кнопка
+document.getElementById('floatingShareBtn').addEventListener('click', function() {
+    const modal = document.getElementById('shareModal');
+    modal.style.display = 'flex';
     
-    // Генерируем QR-код
-    QRCode.toCanvas(document.getElementById('qrcode'), currentUrl, {
-        width: 150,
-        height: 150,
+    // Генерируем QR-код для модалки
+    QRCode.toCanvas(document.getElementById('floatingQrcode'), window.location.href, {
+        width: 170,
         margin: 1,
-        color: {
-            dark: '#0f172a',
-            light: '#ffffff'
-        }
-    }, function(error) {
-        if (error) console.error(error);
+        color: { dark: '#0f172a', light: '#ffffff' }
     });
 });
 
-// Копирование ссылки
-function copyLink() {
-    const linkInput = document.getElementById('shareableLink');
-    linkInput.select();
-    linkInput.setSelectionRange(0, 99999);
-    
-    try {
-        navigator.clipboard.writeText(linkInput.value);
-        document.getElementById('copyFeedback').textContent = '✓ 链接已复制到剪贴板';
-        document.getElementById('copyFeedback').style.color = '#10b981';
-    } catch (err) {
-        console.error('Ошибка копирования:', err);
-        document.getElementById('copyFeedback').textContent = '请手动选择并复制链接';
-        document.getElementById('copyFeedback').style.color = '#ef4444';
+// Закрытие модалки при клике на фон
+document.getElementById('shareModal').addEventListener('click', function(e) {
+    if (e.target.id === 'shareModal') {
+        this.style.display = 'none';
     }
-    
-    setTimeout(() => {
-        document.getElementById('copyFeedback').textContent = '';
-    }, 3000);
-}
-
-// Шаринг в соцсети (заглушки)
-function shareToWeChat() {
-    alert('请使用微信"扫一扫"功能扫描上方的二维码，或点击右上角分享按钮。');
-}
-function shareToWeibo() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent('《马戏团的幽魂》- 沉浸式魔术悬疑戏剧项目，寻找战略合作伙伴！');
-    window.open(`https://service.weibo.com/share/share.php?url=${url}&title=${text}`, '_blank');
-}
+});
 </script>
 </body>
 </html>
