@@ -544,38 +544,93 @@ var _hmt = _hmt || [];
     </footer>
   <!-- JavaScript -->
     <script src="js/main.js"></script>
+<!-- Подключение библиотеки QRCode (ОБЯЗАТЕЛЬНО) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
 <!-- Плавающая кнопка "Поделиться" -->
 <button id="floatingShareBtn" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #C9A227, #8B6914); color: white; border: none; box-shadow: 0 6px 20px rgba(201, 162, 39, 0.4); font-size: 24px; cursor: pointer; z-index: 999; display: flex; align-items: center; justify-content: center;">↗️</button>
 
 <!-- Модальное окно с QR-кодом -->
 <div id="shareModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
-    <div style="background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 320px;">
+    <div style="background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 320px; position: relative;">
         <h3 style="margin-bottom: 20px; color: #1e293b;">分享项目</h3>
-        <div id="floatingQrcode" style="width: 200px; height: 200px; margin: 0 auto 20px; background: white; padding: 15px;"></div>
-        <p style="margin-bottom: 20px; color: #64748b;">扫描二维码，立即分享</p>
-        <button onclick="document.getElementById('shareModal').style.display='none'" style="padding: 10px 30px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer;">关闭</button>
+        <!-- Контейнер для QR-кода ДОЛЖЕН быть пустым -->
+        <div id="floatingQrcode" style="width: 200px; height: 200px; margin: 0 auto 20px; background: white; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px;"></div>
+        <p style="margin-bottom: 20px; color: #64748b;">微信扫码分享或保存</p>
+        <button id="closeModalBtn" style="padding: 10px 30px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer;">关闭</button>
     </div>
 </div>
 
 <script>
-// Плавающая кнопка
-document.getElementById('floatingShareBtn').addEventListener('click', function() {
+// Ждем полной загрузки страницы
+document.addEventListener('DOMContentLoaded', function() {
+    const floatingBtn = document.getElementById('floatingShareBtn');
     const modal = document.getElementById('shareModal');
-    modal.style.display = 'flex';
+    const closeBtn = document.getElementById('closeModalBtn');
+    const qrContainer = document.getElementById('floatingQrcode');
     
-    // Генерируем QR-код для модалки
-    QRCode.toCanvas(document.getElementById('floatingQrcode'), window.location.href, {
-        width: 170,
-        margin: 1,
-        color: { dark: '#0f172a', light: '#ffffff' }
-    });
-});
-
-// Закрытие модалки при клике на фон
-document.getElementById('shareModal').addEventListener('click', function(e) {
-    if (e.target.id === 'shareModal') {
-        this.style.display = 'none';
+    // Проверяем, загрузилась ли библиотека QRCode
+    if (typeof QRCode === 'undefined') {
+        console.error('Библиотека QRCode не загружена!');
+        floatingBtn.innerHTML = '❌';
+        floatingBtn.title = 'Ошибка загрузки QR-кода';
+        return;
     }
+    
+    // Открытие модального окна
+    floatingBtn.addEventListener('click', function() {
+        console.log('Открываем модальное окно...');
+        modal.style.display = 'flex';
+        
+        // Очищаем предыдущий QR-код
+        qrContainer.innerHTML = '';
+        
+        // Генерируем новый QR-код
+        const currentUrl = window.location.href;
+        console.log('Генерируем QR для:', currentUrl);
+        
+        try {
+            QRCode.toCanvas(qrContainer, currentUrl, {
+                width: 170,
+                height: 170,
+                margin: 1,
+                color: {
+                    dark: '#0f172a',      // Цвет точек
+                    light: '#ffffff'      // Цвет фона
+                }
+            }, function(error) {
+                if (error) {
+                    console.error('Ошибка генерации QR:', error);
+                    qrContainer.innerHTML = '<p style="color:red; padding:20px;">QR-код не сгенерирован</p>';
+                } else {
+                    console.log('QR-код успешно создан');
+                }
+            });
+        } catch (error) {
+            console.error('Исключение при генерации QR:', error);
+        }
+    });
+    
+    // Закрытие модалки кнопкой
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+    
+    // Закрытие модалки при клике на фон
+    modal.addEventListener('click', function(e) {
+        if (e.target.id === 'shareModal') {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Закрытие на Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        }
+    });
+    
+    console.log('Модуль плавающей кнопки инициализирован');
 });
 </script>
 </body>
