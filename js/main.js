@@ -119,14 +119,12 @@
     addStaggerAnimation('.reviews-grid', '.review-card');
     addStaggerAnimation('.gallery-grid', '.gallery-item');
 
-    // ========================================
-    // Contact Form Handling
-    // ========================================
-       // ========================================
-    // Contact Form Handling (REAL Formspree)
+    // =======================================
+    
+     // Contact Form Handling
     // ========================================
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
@@ -134,14 +132,14 @@
             const data = Object.fromEntries(formData);
             
             // Validate form
-            if (!data.name || !data.organization || !data.phone || !data._replyto) {
+            if (!data.name || !data.organization || !data.phone || !data.email) {
                 showNotification('请填写所有必填字段', 'error');
                 return;
             }
             
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data._replyto)) {
+            if (!emailRegex.test(data.email)) {
                 showNotification('请输入有效的邮箱地址', 'error');
                 return;
             }
@@ -153,47 +151,20 @@
                 return;
             }
             
-            // ВАЖНО: Устанавливаем действие формы (на случай, если оно изменилось)
-            const formAction = contactForm.getAttribute('action') || 'https://formspree.io/f/xwvnpjpq';
+            // Simulate form submission
+            showNotification('提交成功！我们会尽快与您联系。', 'success');
+            contactForm.reset();
             
-            try {
-                // Показываем состояние загрузки
-                const submitBtn = contactForm.querySelector('.btn-submit');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = '发送中...';
-                submitBtn.disabled = true;
-                
-                // Отправляем данные на Formspree
-                const response = await fetch(formAction, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // УСПЕХ: показываем уведомление и очищаем форму
-                    showNotification('提交成功！我们会尽快与您联系。', 'success');
-                    contactForm.reset();
-                } else {
-                    // ОШИБКА Formspree
-                    showNotification('提交失败，请稍后重试或直接联系我们。', 'error');
-                }
-            } catch (error) {
-                // СЕТЕВАЯ ОШИБКА
-                console.error('Form submission error:', error);
-                showNotification('网络错误，请检查连接后重试。', 'error');
-            } finally {
-                // Восстанавливаем кнопку
-                const submitBtn = contactForm.querySelector('.btn-submit');
-                if (submitBtn) {
-                    submitBtn.textContent = '提交申请';
-                    submitBtn.disabled = false;
-                }
-            }
+            // In production, you would send the data to your server here
+            // Example:
+            // fetch('/api/contact', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // })
         });
     }
+
 
     // ========================================
     // Notification System
