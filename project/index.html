@@ -18,6 +18,23 @@
     </style>
 <style>
         body {
+  background-color: #0A0E17 !important;  /* Тёмный фон, как у слайдов */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* скрываем горизонтальную прокрутку */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* центрируем содержимое по горизонтали */
+}
+
+/* Чтобы слайды не вылезали за пределы body */
+.ppt-slide {
+  max-width: 1280px; /* сохраняем максимальную ширину */
+  flex-shrink: 0; /* предотвращаем сжатие */
+}
+        body {
             color: #C0C5CE;
             font-family: 'Noto Sans SC', sans-serif;
         }
@@ -556,34 +573,40 @@
 </div>
 </div>
 </div>
-        <script>
-  function scaleSlides() {
-    const slides = document.querySelectorAll('.ppt-slide');
-    const windowWidth = window.innerWidth;
-    const slideBaseWidth = 1280; // оригинальная ширина слайда
+       <script>
+  (function() {
+    function scaleSlides() {
+      const slides = document.querySelectorAll('.ppt-slide');
+      const windowWidth = window.innerWidth;
+      const baseWidth = 1280; // оригинальная ширина слайда
 
-    slides.forEach(slide => {
-      // Сброс предыдущих трансформаций
-      slide.style.transform = '';
-      slide.style.marginLeft = '';
-      slide.style.marginRight = '';
+      slides.forEach(slide => {
+        // Сброс предыдущих трансформаций
+        slide.style.transform = '';
+        slide.style.margin = '';
+        slide.style.width = ''; // сбросим, если вдруг
 
-      // Вычисляем масштаб, чтобы слайд помещался по ширине
-      let scale = windowWidth / slideBaseWidth;
-      // Ограничиваем масштаб, чтобы не становился слишком большим на широких экранах
-      scale = Math.min(scale, 1); // не больше 1 (оригинала)
+        // Вычисляем масштаб так, чтобы слайд всегда помещался по ширине
+        let scale = windowWidth / baseWidth;
+        // Не даём слайду стать больше оригинала на широких экранах (но на телефонах scale < 1)
+        scale = Math.min(scale, 1);
 
-      // Применяем масштабирование
-      slide.style.transform = `scale(${scale})`;
-      // Центрируем слайд после масштабирования
-      slide.style.marginLeft = 'auto';
-      slide.style.marginRight = 'auto';
+        // Применяем масштабирование
+        slide.style.transform = `scale(${scale})`;
+        // Центрируем слайд по горизонтали
+        slide.style.marginLeft = 'auto';
+        slide.style.marginRight = 'auto';
+      });
+    }
+
+    // Ждём полной загрузки страницы
+    window.addEventListener('load', function() {
+      scaleSlides();
+      // Также добавим класс для body, чтобы убрать прокрутку
+      document.body.style.overflowX = 'hidden';
     });
-  }
-
-  // Вызываем при загрузке и при изменении размера окна
-  window.addEventListener('load', scaleSlides);
-  window.addEventListener('resize', scaleSlides);
+    window.addEventListener('resize', scaleSlides);
+  })();
 </script>
 </body>
 </html>
