@@ -182,6 +182,10 @@
 <body class="bg-gray-50 py-8">
 <!-- 封面页 -->
 <div class="ppt-slide !bg-[#0A0E17]" type="cover">
+        <!-- Логотип в правом нижнем углу -->
+<div class="absolute bottom-4 right-4 z-20">
+    <img src="logo.png" alt="Company logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity">
+</div>
 <img alt="background" class="absolute inset-0 w-full h-full object-cover opacity-60" src="cover_background.jpg"/>
 <div class="absolute inset-0 bg-gradient-to-b from-[#0A0E17]/30 via-[#1A2536]/50 to-[#0A0E17]/80"></div>
 <!-- 雾气粒子 -->
@@ -436,44 +440,52 @@
 <!-- 主体内容 -->
 <div class="relative z-10 flex gap-8 h-[520px]">
 <!-- 左侧：饮料杯动画 -->
-<div class="flex-1 flex items-center justify-center">
-<div class="relative">
-<!-- 桌子 -->
-<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[400px] h-4 bg-gradient-to-b from-[#2C3E50] to-[#1A2536] rounded-full blur-sm"></div>
-<!-- 玻璃杯 -->
-<div class="relative w-40 h-52">
-<!-- 杯身 -->
-<div class="absolute inset-0 bg-gradient-to-b from-[#C0C5CE]/20 via-[#C0C5CE]/10 to-[#C0C5CE]/20 rounded-b-3xl backdrop-blur-sm border border-[#C0C5CE]/30 overflow-hidden">
-<!-- 液体 -->
-<div class="absolute bottom-0 left-2 right-2 liquid-drain-loop-css overflow-hidden">
-<div class="w-full h-full bg-gradient-to-t from-[#FF6B35] via-[#FF8C42] to-[#FFB347] opacity-90">
-<!-- 漩涡效果 -->
-<div class="swirl-effect absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20">
-<div class="w-full h-full rounded-full border-2 border-[#FF6B35]/50 border-t-transparent"></div>
-</div>
-<!-- 气泡 -->
-<div class="bubble absolute bottom-4 left-1/4 w-2 h-2 bg-[#FF8C42]/60 rounded-full"></div>
-<div class="bubble absolute bottom-8 left-1/2 w-1.5 h-1.5 bg-[#FF8C42]/50 rounded-full" style="animation-delay: 0.3s;"></div>
-<div class="bubble absolute bottom-6 right-1/4 w-2 h-2 bg-[#FF8C42]/55 rounded-full" style="animation-delay: 0.6s;"></div>
-</div>
-</div>
-<!-- 杯壁指印雾气 -->
-<div class="absolute top-8 left-2 w-8 h-12 bg-[#C0C5CE]/20 rounded-full blur-md opacity-60"></div>
-<div class="absolute top-12 right-3 w-6 h-10 bg-[#C0C5CE]/15 rounded-full blur-sm opacity-40"></div>
-</div>
-<!-- 手影效果 -->
-<div class="hand-shadow absolute -right-8 top-12 w-32 h-40">
-    <div class="w-full h-full bg-gradient-to-br from-[#0A0E17]/90 to-[#4A6D7C]/40 rounded-full blur-md transform rotate-12"></div>
-</div>
-<!-- 杯口高光 -->
-<div class="absolute -top-1 left-2 right-2 h-2 bg-[#C0C5CE]/40 rounded-full blur-sm"></div>
-</div>
-<!-- 雾气环绕 -->
-<div class="absolute -inset-8 pointer-events-none">
-<div class="fog-particle absolute w-16 h-16 rounded-full bg-[#4A6D7C]/25 blur-xl" style="top: 0; left: -20px;"></div>
-<div class="fog-particle absolute w-12 h-12 rounded-full bg-[#2C3E50]/30 blur-lg" style="bottom: 10px; right: -15px; animation-delay: 1s;"></div>
-</div>
-</div>
+<!-- Левая колонка: анимация стакана + видео -->
+<div class="flex-1 flex flex-col gap-6">
+    <!-- Верхний ряд: анимация и видео плеер -->
+    <div class="flex items-start gap-4">
+        <!-- Стакан (уменьшенный) -->
+        <div class="relative flex-shrink-0">
+            <div class="relative w-32 h-40">
+                <!-- Оригинальное содержимое, адаптированное под новый размер -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#C0C5CE]/20 via-[#C0C5CE]/10 to-[#C0C5CE]/20 rounded-b-3xl backdrop-blur-sm border border-[#C0C5CE]/30 overflow-hidden">
+                    <div class="absolute bottom-0 left-2 right-2 liquid-drain-loop-css overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-t from-[#FF6B35] via-[#FF8C42] to-[#FFB347] opacity-90">
+                            <div class="swirl-effect absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20">
+                                <div class="w-full h-full rounded-full border-2 border-[#FF6B35]/50 border-t-transparent"></div>
+                            </div>
+                            <div class="bubble absolute bottom-4 left-1/4 w-2 h-2 bg-[#FF8C42]/60 rounded-full"></div>
+                            <div class="bubble absolute bottom-8 left-1/2 w-1.5 h-1.5 bg-[#FF8C42]/50 rounded-full" style="animation-delay: 0.3s;"></div>
+                            <div class="bubble absolute bottom-6 right-1/4 w-2 h-2 bg-[#FF8C42]/55 rounded-full" style="animation-delay: 0.6s;"></div>
+                        </div>
+                    </div>
+                    <div class="absolute top-8 left-2 w-8 h-12 bg-[#C0C5CE]/20 rounded-full blur-md opacity-60"></div>
+                    <div class="absolute top-12 right-3 w-6 h-10 bg-[#C0C5CE]/15 rounded-full blur-sm opacity-40"></div>
+                </div>
+                <div class="hand-shadow absolute -right-8 top-12 w-32 h-40">
+                    <div class="w-full h-full bg-gradient-to-br from-[#0A0E17]/90 to-[#4A6D7C]/40 rounded-full blur-md transform rotate-12"></div>
+                </div>
+                <div class="absolute -top-1 left-2 right-2 h-2 bg-[#C0C5CE]/40 rounded-full blur-sm"></div>
+            </div>
+            <!-- Окружающий туман (скопируйте из оригинала) -->
+            <div class="absolute -inset-8 pointer-events-none">
+                <div class="fog-particle absolute w-16 h-16 rounded-full bg-[#4A6D7C]/25 blur-xl" style="top: 0; left: -20px;"></div>
+                <div class="fog-particle absolute w-12 h-12 rounded-full bg-[#2C3E50]/30 blur-lg" style="bottom: 10px; right: -15px; animation-delay: 1s;"></div>
+            </div>
+        </div>
+
+        <!-- Видео liquid.mp4 -->
+        <div class="flex-shrink-0">
+            <video controls class="w-48 h-40 rounded-lg shadow-2xl border border-[#4A6D7C]/30 object-cover">
+                <source src="liquid.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+    </div>
+    <!-- Пояснение под видео (опционально) -->
+    <div class="text-center text-[#C0C5CE]/60 text-sm">
+        Демонстрация эффекта жидкости
+    </div>
 </div>
 <!-- 右侧：说明文字 -->
 <div class="w-[420px] flex flex-col justify-center gap-6">
@@ -505,6 +517,10 @@
 </div>
 </div>
 </div><div class="ppt-slide !bg-[#0A0E17]" type="final">
+        <!-- Логотип в правом нижнем углу -->
+<div class="absolute bottom-4 right-4 z-20">
+    <img src="logo.png" alt="Company logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity">
+</div>
 <div class="absolute inset-0 bg-gradient-to-b from-[#0A0E17] via-[#1A2536] to-[#0A0E17]"></div>
 <!-- 雾气效果 -->
 <div class="absolute inset-0 overflow-hidden pointer-events-none">
