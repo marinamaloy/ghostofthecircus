@@ -432,51 +432,51 @@
 <!-- 主体内容 -->
 <div class="relative z-10 flex gap-8 h-[520px]">
 <!-- 左侧：饮料杯动画 -->
-<!-- Левая колонка: анимация стакана + видео (центрированы) -->
-<div class="flex-1 flex flex-col gap-6">
-    <!-- Ряд с анимацией и видео, теперь центрирован -->
-    <div class="flex items-start gap-4 justify-center">
-        <!-- Стакан (уменьшенный) -->
-        <div class="relative flex-shrink-0">
-            <div class="relative w-32 h-40">
-                <!-- содержимое стакана (без изменений) -->
-                <div class="absolute inset-0 bg-gradient-to-b from-[#C0C5CE]/20 via-[#C0C5CE]/10 to-[#C0C5CE]/20 rounded-b-3xl backdrop-blur-sm border border-[#C0C5CE]/30 overflow-hidden">
-                    <div class="absolute bottom-0 left-2 right-2 liquid-drain-loop-css overflow-hidden">
-                        <div class="w-full h-full bg-gradient-to-t from-[#FF6B35] via-[#FF8C42] to-[#FFB347] opacity-90">
-                            <div class="swirl-effect absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20">
-                                <div class="w-full h-full rounded-full border-2 border-[#FF6B35]/50 border-t-transparent"></div>
-                            </div>
-                            <div class="bubble absolute bottom-4 left-1/4 w-2 h-2 bg-[#FF8C42]/60 rounded-full"></div>
-                            <div class="bubble absolute bottom-8 left-1/2 w-1.5 h-1.5 bg-[#FF8C42]/50 rounded-full" style="animation-delay: 0.3s;"></div>
-                            <div class="bubble absolute bottom-6 right-1/4 w-2 h-2 bg-[#FF8C42]/55 rounded-full" style="animation-delay: 0.6s;"></div>
+<!-- Левая колонка: анимация стакана (увеличена) и видео снизу -->
+<div class="flex-1 flex flex-col items-center gap-8">
+    <!-- Стакан (увеличенный) -->
+    <div class="relative">
+        <div class="relative w-48 h-60"> <!-- увеличено с w-32 h-40 -->
+            <!-- Стенки стакана -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#C0C5CE]/20 via-[#C0C5CE]/10 to-[#C0C5CE]/20 rounded-b-3xl backdrop-blur-sm border border-[#C0C5CE]/30 overflow-hidden">
+                <!-- Жидкость: шире (left-3 right-3) -->
+                <div class="absolute bottom-0 left-3 right-3 liquid-drain-loop-css overflow-hidden">
+                    <div class="w-full h-full bg-gradient-to-t from-[#FF6B35] via-[#FF8C42] to-[#FFB347] opacity-90">
+                        <!-- Вихрь: увеличен до w-24 h-24 -->
+                        <div class="swirl-effect absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24">
+                            <div class="w-full h-full rounded-full border-2 border-[#FF6B35]/50 border-t-transparent"></div>
                         </div>
+                        <!-- Пузырьки: увеличены и смещены -->
+                        <div class="bubble absolute bottom-6 left-1/4 w-3 h-3 bg-[#FF8C42]/60 rounded-full"></div>
+                        <div class="bubble absolute bottom-12 left-1/2 w-2 h-2 bg-[#FF8C42]/50 rounded-full" style="animation-delay: 0.3s;"></div>
+                        <div class="bubble absolute bottom-8 right-1/4 w-3 h-3 bg-[#FF8C42]/55 rounded-full" style="animation-delay: 0.6s;"></div>
                     </div>
-                    <div class="absolute top-8 left-2 w-8 h-12 bg-[#C0C5CE]/20 rounded-full blur-md opacity-60"></div>
-                    <div class="absolute top-12 right-3 w-6 h-10 bg-[#C0C5CE]/15 rounded-full blur-sm opacity-40"></div>
                 </div>
-                <div class="hand-shadow absolute -right-8 top-12 w-32 h-40">
-                    <div class="w-full h-full bg-gradient-to-br from-[#0A0E17]/90 to-[#4A6D7C]/40 rounded-full blur-md transform rotate-12"></div>
-                </div>
-                <div class="absolute -top-1 left-2 right-2 h-2 bg-[#C0C5CE]/40 rounded-full blur-sm"></div>
+                <!-- Отпечатки пальцев (немного увеличены) -->
+                <div class="absolute top-10 left-3 w-10 h-14 bg-[#C0C5CE]/20 rounded-full blur-md opacity-60"></div>
+                <div class="absolute top-14 right-4 w-8 h-12 bg-[#C0C5CE]/15 rounded-full blur-sm opacity-40"></div>
             </div>
-            <!-- туман вокруг стакана -->
-            <div class="absolute -inset-8 pointer-events-none">
-                <div class="fog-particle absolute w-16 h-16 rounded-full bg-[#4A6D7C]/25 blur-xl" style="top: 0; left: -20px;"></div>
-                <div class="fog-particle absolute w-12 h-12 rounded-full bg-[#2C3E50]/30 blur-lg" style="bottom: 10px; right: -15px; animation-delay: 1s;"></div>
+            <!-- Рука (hand-shadow): увеличена и сдвинута -->
+            <div class="hand-shadow absolute -right-10 top-16 w-40 h-48">
+                <div class="w-full h-full bg-gradient-to-br from-[#0A0E17]/90 to-[#4A6D7C]/40 rounded-full blur-md transform rotate-12"></div>
             </div>
+            <!-- Блик на верхнем крае стакана -->
+            <div class="absolute -top-1 left-3 right-3 h-2 bg-[#C0C5CE]/40 rounded-full blur-sm"></div>
         </div>
-
-        <!-- Видео liquid.mp4 -->
-        <div class="flex-shrink-0">
-            <video controls class="w-48 h-40 rounded-lg shadow-2xl border border-[#4A6D7C]/30 object-cover">
-                <source src="liquid.mp4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
+        <!-- Туман вокруг стакана (расширен) -->
+        <div class="absolute -inset-10 pointer-events-none">
+            <div class="fog-particle absolute w-20 h-20 rounded-full bg-[#4A6D7C]/25 blur-xl" style="top: 0; left: -30px;"></div>
+            <div class="fog-particle absolute w-16 h-16 rounded-full bg-[#2C3E50]/30 blur-lg" style="bottom: 10px; right: -20px; animation-delay: 1s;"></div>
         </div>
     </div>
-    <!-- Пояснение под видео (оставлено как есть) -->
-    <div class="text-center text-[#C0C5CE]/60 text-sm">
-        液体效应演示
+
+    <!-- Видео liquid.mp4 под стаканом -->
+    <div class="text-center">
+        <video controls class="w-80 h-auto rounded-lg shadow-2xl border border-[#4A6D7C]/30">
+            <source src="liquid.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <p class="text-[#C0C5CE]/60 text-sm mt-2"> 液体效应演示</p>
     </div>
 </div>
 <!-- 右侧：说明文字 -->
@@ -556,5 +556,34 @@
 </div>
 </div>
 </div>
+        <script>
+  function scaleSlides() {
+    const slides = document.querySelectorAll('.ppt-slide');
+    const windowWidth = window.innerWidth;
+    const slideBaseWidth = 1280; // оригинальная ширина слайда
+
+    slides.forEach(slide => {
+      // Сброс предыдущих трансформаций
+      slide.style.transform = '';
+      slide.style.marginLeft = '';
+      slide.style.marginRight = '';
+
+      // Вычисляем масштаб, чтобы слайд помещался по ширине
+      let scale = windowWidth / slideBaseWidth;
+      // Ограничиваем масштаб, чтобы не становился слишком большим на широких экранах
+      scale = Math.min(scale, 1); // не больше 1 (оригинала)
+
+      // Применяем масштабирование
+      slide.style.transform = `scale(${scale})`;
+      // Центрируем слайд после масштабирования
+      slide.style.marginLeft = 'auto';
+      slide.style.marginRight = 'auto';
+    });
+  }
+
+  // Вызываем при загрузке и при изменении размера окна
+  window.addEventListener('load', scaleSlides);
+  window.addEventListener('resize', scaleSlides);
+</script>
 </body>
 </html>
