@@ -184,7 +184,7 @@
 <div class="ppt-slide !bg-[#0A0E17]" type="cover">
         <!-- Логотип в правом нижнем углу -->
 <div class="absolute bottom-4 right-4 z-20">
-    <img src="logo.png" alt="Company logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity">
+    <img src="logo.png" alt="Company logo" class="h-24 w-auto opacity-80 hover:opacity-100 transition-opacity">
 </div>
 <img alt="background" class="absolute inset-0 w-full h-full object-cover opacity-60" src="cover_background.jpg"/>
 <div class="absolute inset-0 bg-gradient-to-b from-[#0A0E17]/30 via-[#1A2536]/50 to-[#0A0E17]/80"></div>
@@ -432,14 +432,14 @@
 <!-- 主体内容 -->
 <div class="relative z-10 flex gap-8 h-[520px]">
 <!-- 左侧：饮料杯动画 -->
-<!-- Левая колонка: анимация стакана + видео -->
+<!-- Левая колонка: анимация стакана + видео (центрированы) -->
 <div class="flex-1 flex flex-col gap-6">
-    <!-- Верхний ряд: анимация и видео плеер -->
-    <div class="flex items-start gap-4">
+    <!-- Ряд с анимацией и видео, теперь центрирован -->
+    <div class="flex items-start gap-4 justify-center">
         <!-- Стакан (уменьшенный) -->
         <div class="relative flex-shrink-0">
             <div class="relative w-32 h-40">
-                <!-- Оригинальное содержимое, адаптированное под новый размер -->
+                <!-- содержимое стакана (без изменений) -->
                 <div class="absolute inset-0 bg-gradient-to-b from-[#C0C5CE]/20 via-[#C0C5CE]/10 to-[#C0C5CE]/20 rounded-b-3xl backdrop-blur-sm border border-[#C0C5CE]/30 overflow-hidden">
                     <div class="absolute bottom-0 left-2 right-2 liquid-drain-loop-css overflow-hidden">
                         <div class="w-full h-full bg-gradient-to-t from-[#FF6B35] via-[#FF8C42] to-[#FFB347] opacity-90">
@@ -459,7 +459,7 @@
                 </div>
                 <div class="absolute -top-1 left-2 right-2 h-2 bg-[#C0C5CE]/40 rounded-full blur-sm"></div>
             </div>
-            <!-- Окружающий туман (скопируйте из оригинала) -->
+            <!-- туман вокруг стакана -->
             <div class="absolute -inset-8 pointer-events-none">
                 <div class="fog-particle absolute w-16 h-16 rounded-full bg-[#4A6D7C]/25 blur-xl" style="top: 0; left: -20px;"></div>
                 <div class="fog-particle absolute w-12 h-12 rounded-full bg-[#2C3E50]/30 blur-lg" style="bottom: 10px; right: -15px; animation-delay: 1s;"></div>
@@ -474,9 +474,9 @@
             </video>
         </div>
     </div>
-    <!-- Пояснение под видео (опционально) -->
+    <!-- Пояснение под видео (оставлено как есть) -->
     <div class="text-center text-[#C0C5CE]/60 text-sm">
-        Демонстрация эффекта жидкости
+        液体效应演示
     </div>
 </div>
 <!-- 右侧：说明文字 -->
@@ -511,7 +511,7 @@
 </div><div class="ppt-slide !bg-[#0A0E17]" type="final">
         <!-- Логотип в правом нижнем углу -->
 <div class="absolute bottom-4 right-4 z-20">
-    <img src="logo.png" alt="Company logo" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity">
+    <img src="logo.png" alt="Company logo" class="h-24 w-auto opacity-80 hover:opacity-100 transition-opacity">
 </div>
 <div class="absolute inset-0 bg-gradient-to-b from-[#0A0E17] via-[#1A2536] to-[#0A0E17]"></div>
 <!-- 雾气效果 -->
