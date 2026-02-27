@@ -9,31 +9,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Chiron+Hei+HK:wght@400;700&amp;family=Oranienbaum&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;family=Quattrocento+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<style type="text/tailwindcss">
-        @layer utilities {
-            .ppt-slide {
-                @apply relative w-[1280px] h-[720px] mx-auto p-[40px] box-border overflow-hidden mb-[40px];
-            }
-        }
-    </style>
+
 <style>
-        body {
-  background-color: #0A0E17 !important;  /* Тёмный фон, как у слайдов */
+        /* Базовые сбросы */
+/* Базовые сбросы */
+* {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* скрываем горизонтальную прокрутку */
-  width: 100%;
+  background-color: #0A0E17;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center; /* центрируем содержимое по горизонтали */
+  align-items: center;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Чтобы слайды не вылезали за пределы body */
+/* Стили для каждого слайда */
 .ppt-slide {
-  max-width: 1280px; /* сохраняем максимальную ширину */
-  flex-shrink: 0; /* предотвращаем сжатие */
+  position: relative;
+  width: 100%;
+  max-width: 1280px;        /* не растягивается шире оригинала */
+  aspect-ratio: 1280 / 720; /* сохраняем пропорции 16:9 */
+  margin: 0 auto 40px auto; /* центрирование и нижний отступ */
+  padding: 40px;            /* внутренние отступы, как было */
+  overflow: hidden;         /* скрываем выходящее за границы */
+  background-color: #0A0E17; /* заливка на всякий случай */
 }
+
+/* На маленьких экранах уменьшаем отступы, чтобы не съедать пространство */
+@media (max-width: 600px) {
+  .ppt-slide {
+    padding: 20px 15px;     /* уменьшенные отступы для мобильных */
+    margin-bottom: 20px;
+  }
+}
+
+/* Если браузер не поддерживает aspect-ratio, подстрахуемся скриптом */
         body {
             color: #C0C5CE;
             font-family: 'Noto Sans SC', sans-serif;
@@ -573,39 +590,22 @@
 </div>
 </div>
 </div>
-       <script>
+      <script>
   (function() {
-    function scaleSlides() {
+    function adjustSlides() {
       const slides = document.querySelectorAll('.ppt-slide');
-      const windowWidth = window.innerWidth;
-      const baseWidth = 1280; // оригинальная ширина слайда
-
       slides.forEach(slide => {
-        // Сброс предыдущих трансформаций
-        slide.style.transform = '';
-        slide.style.margin = '';
-        slide.style.width = ''; // сбросим, если вдруг
-
-        // Вычисляем масштаб так, чтобы слайд всегда помещался по ширине
-        let scale = windowWidth / baseWidth;
-        // Не даём слайду стать больше оригинала на широких экранах (но на телефонах scale < 1)
-        scale = Math.min(scale, 1);
-
-        // Применяем масштабирование
-        slide.style.transform = `scale(${scale})`;
-        // Центрируем слайд по горизонтали
-        slide.style.marginLeft = 'auto';
-        slide.style.marginRight = 'auto';
+        // Убедимся, что пропорции сохраняются, если aspect-ratio не поддерживается
+        if (!CSS.supports('aspect-ratio', '16 / 9')) {
+          const width = slide.offsetWidth;
+          slide.style.height = (width * 720 / 1280) + 'px';
+        }
       });
     }
-
-    // Ждём полной загрузки страницы
-    window.addEventListener('load', function() {
-      scaleSlides();
-      // Также добавим класс для body, чтобы убрать прокрутку
-      document.body.style.overflowX = 'hidden';
-    });
-    window.addEventListener('resize', scaleSlides);
+    window.addEventListener('load', adjustSlides);
+    window.addEventListener('resize', adjustSlides);
+    if (document.readyState !== 'loading') adjustSlides();
+    else document.addEventListener('DOMContentLoaded', adjustSlides);
   })();
 </script>
 </body>
